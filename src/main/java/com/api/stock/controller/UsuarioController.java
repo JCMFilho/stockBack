@@ -19,7 +19,7 @@ import com.api.stock.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "API Usuario")
+@Tag(name = "API Usuário")
 @RestController
 @RequestMapping("/api/usuario")
 @CrossOrigin

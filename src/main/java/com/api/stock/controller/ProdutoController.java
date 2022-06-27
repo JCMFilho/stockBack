@@ -47,15 +47,14 @@ public class ProdutoController {
 	
 	@Operation(summary = "Atualizar produto")
 	@PutMapping("")
-	public ProdutoDTO putUsuario(@RequestBody ProdutoDTO produto) {
+	public ProdutoDTO putProduto(@RequestBody ProdutoDTO produto) {
 		return produto;
 	}
 	
 	@Operation(summary = "Excluir produto")
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteUsuario(@PathVariable("id") Integer id) {
+	public void deleteProduto(@PathVariable("id") Integer id) {
 		
 	}
-	
 }
