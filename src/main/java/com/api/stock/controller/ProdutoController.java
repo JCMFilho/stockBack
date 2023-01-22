@@ -1,5 +1,7 @@
 package com.api.stock.controller;
 
+import com.api.stock.entity.Produto;
+import com.api.stock.interfaces.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,40 +23,47 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "API Produto")
-@RestController
-@RequestMapping("/api/produto")
+import java.util.List;
+
+
 @CrossOrigin
+@RestController
+@Tag(name = "API Produto")
+@RequestMapping("/api/produto")
 public class ProdutoController {
 
 	@Autowired
-	private ProdutoService produtoService;
-	
+	private IProdutoService produtoService;
+
+	@GetMapping("/{id}")
 	@Operation(summary = "Buscar produto")
-	@GetMapping("")
-	public ProdutoDTO buscarProduto(@Parameter(description = "Id do departamento") @RequestParam(value = "departamento", required=false) Integer idDepartamento, 
-			@Parameter(description = "Id da categoria") @RequestParam(value = "categoria", required=false) Integer idCategoria, 
-			@Parameter(description = "Id do filtro") @RequestParam(value = "filtro", required=false) Integer idFiltro){
-		return produtoService.getProduto();
+	public Produto buscarProduto(@Parameter(description = "Id do produto") @PathVariable(value = "id", required=true) Integer id){
+		return produtoService.getProduto(id);
 	}
-	
-	@Operation(summary = "Cadastrar produto")
+
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ProdutoDTO postProduto(@RequestBody ProdutoDTO produto) {
-		return produto;
+	@Operation(summary = "Cadastrar produto")
+	public Produto cadastrarProduto(@RequestBody ProdutoDTO produto) {
+		return produtoService.salvarProduto(produto);
 	}
-	
-	@Operation(summary = "Atualizar produto")
-	@PutMapping("")
-	public ProdutoDTO putProduto(@RequestBody ProdutoDTO produto) {
-		return produto;
-	}
-	
-	@Operation(summary = "Excluir produto")
+
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@Operation(summary = "Excluir produto")
 	public void deleteProduto(@PathVariable("id") Integer id) {
-		
 	}
+
+	@GetMapping("/listar-todos")
+	@Operation(summary = "Listar todos os produtos")
+	public List<ProdutoDTO> listarProdutos(@RequestParam(value="idUsuario", required = false) String idUsuario){
+		return produtoService.listarProdutos(idUsuario);
+	}
+
+	@GetMapping("/listar-por-departamento/{departamento}")
+	@Operation(summary = "Listar todos os produtos por departamento")
+	public List<ProdutoDTO> listarProdutosPorDepartamento(@PathVariable("departamento") Integer departamento, @RequestParam(value="idUsuario", required = false) String idUsuario){
+		return produtoService.listarProdutosPorDepartamento(departamento,idUsuario);
+	}
+
 }

@@ -1,59 +1,36 @@
 package com.api.stock.entity;
 
-import com.api.stock.model.ProdutoDTO;
-import com.api.stock.model.UsuarioDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+
+
+@Getter
+@Setter
+@Entity
 public class Avaliacao {
-	
-	private Integer id;
-	private ProdutoDTO idProduto;
-	private UsuarioDTO idUsuario;
+
+	@Id
+	private String id;
+	@ManyToOne
+	@JoinColumn(name = "produto_id")
+	@JsonIgnore
+	private Produto idProduto;
+
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario idUsuario;
+
+	@Column(name="TITULO")
 	private String titulo;
+
+	@Column(name="DESCRICAO")
 	private String descricao;
+	@Column(name="NOTA")
 	private Integer nota;
+	@Column(name="DATA")
 	private String data;
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	public Integer getNota() {
-		return nota;
-	}
-	public void setNota(Integer nota) {
-		this.nota = nota;
-	}
-	public String getData() {
-		return data;
-	}
-	public void setData(String data) {
-		this.data = data;
-	}
-	public ProdutoDTO getIdProduto() {
-		return idProduto;
-	}
-	public void setIdProduto(ProdutoDTO idProduto) {
-		this.idProduto = idProduto;
-	}
-	public UsuarioDTO getIdUsuario() {
-		return idUsuario;
-	}
-	public void setIdUsuario(UsuarioDTO idUsuario) {
-		this.idUsuario = idUsuario;
-	}
 
 }
