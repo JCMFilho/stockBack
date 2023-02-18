@@ -9,10 +9,18 @@ public interface IUsuarioService {
 
 	Usuario getUsuario(String id);
 
+	Usuario getUsuarioPorEmail(String email);
+
 	List<Usuario> getUsuarios();
 
-	String postUsuario(Usuario usuario);
+	Usuario postUsuario(Usuario usuario);
+
+	Usuario putUsuario(Usuario usuario);
 
 	Usuario validarLogin(Login login);
-	
+
+	int recuperarSenha(String email);
+
+	boolean trocarSenha(Login login);
+
 }

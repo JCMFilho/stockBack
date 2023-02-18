@@ -2,7 +2,6 @@ package com.api.stock.controller;
 
 import com.api.stock.entity.Departamento;
 import com.api.stock.interfaces.IDepartarmentoService;
-import com.api.stock.model.AvaliacaoDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.api.stock.controller;
 
 import com.api.stock.entity.Promocao;
-import com.api.stock.service.PromocaoService;
+import com.api.stock.interfaces.IPromocaoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.List;
 public class PromocaoController {
 
     @Autowired
-    PromocaoService promocaoService;
+    IPromocaoService promocaoService;
 
     @GetMapping("/{tipo}")
     @Operation(summary = "Buscar promoção por tipo")

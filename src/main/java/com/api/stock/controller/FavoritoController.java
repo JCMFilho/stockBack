@@ -1,9 +1,7 @@
 package com.api.stock.controller;
 
-import com.api.stock.entity.Endereco;
 import com.api.stock.entity.Favorito;
 import com.api.stock.interfaces.IFavoritoService;
-import com.api.stock.model.EnderecoDTO;
 import com.api.stock.model.FavoritoDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

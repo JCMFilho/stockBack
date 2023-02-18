@@ -1,6 +1,5 @@
 package com.api.stock.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.api.stock.entity.Endereco;

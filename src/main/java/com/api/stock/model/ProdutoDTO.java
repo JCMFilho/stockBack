@@ -1,6 +1,5 @@
 package com.api.stock.model;
 
-import com.api.stock.entity.Departamento;
 import com.api.stock.entity.Produto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,10 +16,10 @@ public class ProdutoDTO {
 	private String descricao;
 	private Integer totalAcessos;
 	private String imagem;
+	private Integer preco;
 	private Integer departamentoId;
-
+	private String departamento;
 	private Boolean isFavorito;
-
 	private Integer favoritoId;
 
 	public ProdutoDTO(Produto produto, Integer favoritoId){
@@ -30,9 +29,13 @@ public class ProdutoDTO {
 		this.estoque = produto.getEstoque();
 		this.totalAcessos = produto.getTotalAcessos();
 		this.imagem = produto.getImagem();
+		this.preco = produto.getPreco();
 		this.departamentoId = produto.getDepartamento().getId();
+		this.departamento = produto.getDepartamento().getNome();
 		this.favoritoId = favoritoId;
 		this.isFavorito = favoritoId != null;
 	}
+
+
 
 }

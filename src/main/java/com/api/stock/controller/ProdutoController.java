@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.stock.model.ProdutoDTO;
-import com.api.stock.service.ProdutoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,18 +31,24 @@ import java.util.List;
 public class ProdutoController {
 
 	@Autowired
-	private IProdutoService produtoService;
+	IProdutoService produtoService;
 
 	@GetMapping("/{id}")
 	@Operation(summary = "Buscar produto")
-	public Produto buscarProduto(@Parameter(description = "Id do produto") @PathVariable(value = "id", required=true) Integer id){
+	public Produto buscarProduto(@Parameter(description = "Id do produto") @PathVariable(value = "id") Integer id){
 		return produtoService.getProduto(id);
+	}
+
+	@GetMapping("/nome/{nome}")
+	@Operation(summary = "Buscar produto")
+	public List<ProdutoDTO> buscarProdutosPorNome(@RequestParam(value="idUsuario", required = false) String idUsuario,@Parameter(description = "Nome do produto") @PathVariable(value = "nome") String nome){
+		return produtoService.buscarProdutosPorNome(nome,idUsuario);
 	}
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
 	@Operation(summary = "Cadastrar produto")
-	public Produto cadastrarProduto(@RequestBody ProdutoDTO produto) {
+	public ProdutoDTO cadastrarProduto(@RequestBody ProdutoDTO produto) {
 		return produtoService.salvarProduto(produto);
 	}
 
@@ -52,6 +56,7 @@ public class ProdutoController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@Operation(summary = "Excluir produto")
 	public void deleteProduto(@PathVariable("id") Integer id) {
+		produtoService.deleteProduto(id);
 	}
 
 	@GetMapping("/listar-todos")
