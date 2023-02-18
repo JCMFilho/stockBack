@@ -1,5 +1,8 @@
 package com.api.stock.controller;
 
+import com.api.stock.entity.Usuario;
+import com.api.stock.interfaces.IUsuarioService;
+import com.api.stock.model.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,49 +12,69 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.api.stock.model.UsuarioDTO;
-import com.api.stock.service.UsuarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "API Usuário")
-@RestController
-@RequestMapping("/api/usuario")
+import java.util.List;
+
 @CrossOrigin
+@RestController
+@Tag(name = "API Usuário")
+@RequestMapping("/api/usuario")
 public class UsuarioController {
 	
 	@Autowired
-	private UsuarioService usuarioService;
-	
+	IUsuarioService usuarioService;
 
-	@Operation(summary = "Buscar usuário")
 	@GetMapping("/{id}")
-	public UsuarioDTO buscarUsuario(@PathVariable("id") Integer id){
-		return usuarioService.getUsuario();
+	@Operation(summary = "Buscar usuário")
+	public Usuario getUsuario(@PathVariable("id") String id){
+		return usuarioService.getUsuario(id);
 	}
-	
-	
-	@Operation(summary = "Cadastrar usuário")
+
+	@GetMapping("/email/{email}")
+	@Operation(summary = "Buscar usuário pelo e-mail")
+	public Usuario getUsuarioByEmail(@PathVariable("email") String email){
+		return usuarioService.getUsuarioPorEmail(email);
+	}
+
+	@GetMapping("")
+	@Operation(summary = "Buscar usuários")
+	public List<Usuario> getUsuarios(){
+		return usuarioService.getUsuarios();
+	}
+
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public UsuarioDTO postUsuario(@RequestBody UsuarioDTO usuario) {
-		return usuario;
+	@Operation(summary = "Cadastrar usuário")
+	public Usuario postUsuario(@RequestBody Usuario usuario) {
+		return usuarioService.postUsuario(usuario);
 	}
-	
-	@Operation(summary = "Fazer login")
-	@GetMapping("/autenticar")
-	public void autenticar(@RequestParam("email") String email, @RequestParam("senha") String senha) {	
-	}
-	
-	@Operation(summary = "Atualizar usuário")
+
 	@PutMapping("")
-	public UsuarioDTO putUsuario(@RequestBody UsuarioDTO usuario) {
-		return usuario;
+	@Operation(summary = "Atualizar usuário")
+	public Usuario putUsuario(@RequestBody Usuario usuario) {
+		return usuarioService.putUsuario(usuario);
 	}
-	
+
+	@PostMapping("/login")
+	@Operation(summary = "Realizar Login")
+	public Usuario login(@RequestBody Login login){
+		return usuarioService.validarLogin(login);
+	}
+
+	@Operation(summary = "Recuperar senha", description = "Recuperar a senha do usuário do sistema")
+	@PostMapping("/recuperar")
+	public int recuperarSenha(@RequestBody String email) {
+		return usuarioService.recuperarSenha(email);
+	}
+
+	@Operation(summary = "Trocar senha", description = "Trocar a senha do usuário do sistema")
+	@PostMapping("/trocar")
+	public boolean trocarSenha(@RequestBody Login login) {
+		return usuarioService.trocarSenha(login);
+	}
 }

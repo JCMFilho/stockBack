@@ -2,6 +2,7 @@ package com.api.stock.controller;
 
 import java.util.List;
 
+import com.api.stock.interfaces.IAvaliacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,29 +16,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.stock.entity.Avaliacao;
 import com.api.stock.model.AvaliacaoDTO;
-import com.api.stock.service.AvaliacaoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "API Avaliação")
-@RestController
-@RequestMapping("/api/avaliacao")
 @CrossOrigin
+@RestController
+@Tag(name = "API Avaliação")
+@RequestMapping("/api/avaliacao")
+
 public class AvaliacaoController {
 	
 	@Autowired
-	private AvaliacaoService avaliacaoService;
-	
-	@Operation(summary = "Buscar avaliação", description = "Retorna todas as avaliações de um produto")
+	IAvaliacaoService avaliacaoService;
+
 	@GetMapping("/{idProduto}")
+	@Operation(summary = "Buscar avaliação", description = "Retorna todas as avaliações de um produto")
 	public List<AvaliacaoDTO> buscarAvaliacao(@PathVariable("idProduto") Integer id){
 		return avaliacaoService.getAvaliacao();
 	}
-	
-	@Operation(summary = "Cadastrar avaliação")
+
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
+	@Operation(summary = "Cadastrar avaliação")
 	public Avaliacao postAvalicao(@RequestBody Avaliacao avaliacao) {
 		return avaliacao;
 	}

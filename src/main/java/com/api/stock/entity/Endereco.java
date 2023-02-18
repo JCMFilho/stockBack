@@ -1,64 +1,46 @@
 package com.api.stock.entity;
 
-import com.api.stock.model.UsuarioDTO;
+import com.api.stock.model.EnderecoDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
 public class Endereco {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
 	private Integer id;
-	private UsuarioDTO idUsuario;
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	@JsonIgnore
+	private Usuario idUsuario;
 	private String tipo;
 	private String logradouro;
+	private String numero;
 	private String bairro;
 	private String cidade;
 	private String estado;
 	private String cep;
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public UsuarioDTO getIdUsuario() {
-		return idUsuario;
-	}
-	public void setIdUsuario(UsuarioDTO idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-	public String getTipo() {
-		return tipo;
-	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-	public String getLogradouro() {
-		return logradouro;
-	}
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	public String getCep() {
-		return cep;
-	}
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
 
+	public Endereco(EnderecoDTO dto){
+		this.bairro = dto.getBairro();
+		this.cep = dto.getCep();
+		this.id = dto.getId();
+		this.cidade = dto.getCidade();
+		this.estado = dto.getEstado();
+		this.logradouro = dto.getLogradouro();
+		this.numero = dto.getNumero();
+		this.tipo = dto.getTipo();
+		Usuario usuario = new Usuario();
+		usuario.setId(dto.getUsuarioId());
+		this.idUsuario = usuario;
+	}
 }

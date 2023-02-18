@@ -15,7 +15,7 @@ public class AvaliacaoService implements IAvaliacaoService {
 	public List<AvaliacaoDTO> getAvaliacao() {
 		List<AvaliacaoDTO> avaliacoes = new ArrayList<>();
 		AvaliacaoDTO avaliacao = new AvaliacaoDTO();
-		avaliacao.setId(1);
+		avaliacao.setId("1");
 		avaliacao.setNome("Sarah");
 		avaliacao.setTitulo("Muito bom");
 		avaliacao.setDescricao("Gostei muito do produto, compraria novamente");
@@ -23,7 +23,7 @@ public class AvaliacaoService implements IAvaliacaoService {
 		avaliacao.setData("15/05/2022");
 		avaliacoes.add(avaliacao);
 		avaliacao = new AvaliacaoDTO();
-		avaliacao.setId(2);
+		avaliacao.setId("2");
 		avaliacao.setNome("Ana");
 		avaliacao.setTitulo("Mediano");
 		avaliacao.setDescricao("Achei o produto muito pequeno para o valor");
