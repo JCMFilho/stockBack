@@ -12,5 +12,9 @@ public interface IEnderecoService {
 	Endereco saveEndereco(EnderecoDTO endereco);
 
 	void deleteEndereco(Integer idEndereco);
+
+	void definirEnderecoPrincipal(Integer idEndereco);
+
+	Endereco buscarEnderecoPrincipal(String idUsuario);
 	
 }

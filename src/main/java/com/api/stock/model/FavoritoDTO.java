@@ -9,8 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FavoritoDTO {
 
-    private Integer id;
-
     private String idUsuario;
 
     private Integer idProduto;

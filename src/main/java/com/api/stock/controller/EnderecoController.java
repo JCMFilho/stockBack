@@ -6,15 +6,7 @@ import com.api.stock.entity.Endereco;
 import com.api.stock.interfaces.IEnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.api.stock.model.EnderecoDTO;
 
@@ -36,6 +28,12 @@ public class EnderecoController {
 		return enderecoService.getEnderecoByUserId(id);
 	}
 
+	@GetMapping("/endereco-principal/{idUsuario}")
+	@Operation(summary = "Buscar endereço principal do usuário", description = "Retorna o endereço principal do usuário")
+	public Endereco buscarEnderecoPrincipal(@PathVariable("idUsuario") String id){
+		return enderecoService.buscarEnderecoPrincipal(id);
+	}
+
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
 	@Operation(summary = "Cadastrar endereço")
@@ -51,4 +49,10 @@ public class EnderecoController {
 		enderecoService.deleteEndereco(id);
 	}
 
+	@PutMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@Operation(summary = "Definir endereço como principal")
+	public void definirEnderecoPrincipal(@PathVariable("id") Integer id){
+		enderecoService.definirEnderecoPrincipal(id);
+	}
 }

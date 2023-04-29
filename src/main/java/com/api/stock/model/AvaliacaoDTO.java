@@ -6,12 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AvaliacaoDTO {
-	
-	private String id;
-	private String nome;
+
 	private String titulo;
 	private String descricao;
 	private Integer nota;
-	private String data;
+	private String idUsuario;
+	private Integer idProduto;
 
 }

@@ -64,5 +64,4 @@ public class Produto {
         this.departamento = depart;
     }
 
-
 }

@@ -64,6 +64,11 @@ public class ProdutoController {
 	public List<ProdutoDTO> listarProdutos(@RequestParam(value="idUsuario", required = false) String idUsuario){
 		return produtoService.listarProdutos(idUsuario);
 	}
+	@GetMapping("/meus-favoritos")
+	@Operation(summary = "Listar todos os produtos favoritos do usuário")
+	public List<ProdutoDTO> findFavoritosByUsuario(@RequestParam("idUsuario") String idUsuario){
+		return produtoService.findFavoritosByUsuario(idUsuario);
+	}
 
 	@GetMapping("/listar-por-departamento/{departamento}")
 	@Operation(summary = "Listar todos os produtos por departamento")

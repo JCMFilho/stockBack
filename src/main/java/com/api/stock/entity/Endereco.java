@@ -30,6 +30,8 @@ public class Endereco {
 	private String estado;
 	private String cep;
 
+	private Boolean enderecoPrincipal;
+
 	public Endereco(EnderecoDTO dto){
 		this.bairro = dto.getBairro();
 		this.cep = dto.getCep();

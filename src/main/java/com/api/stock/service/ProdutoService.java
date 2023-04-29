@@ -38,6 +38,7 @@ public class ProdutoService implements IProdutoService {
 			departamento = repositoryDepartamento.saveAndFlush(departamento);
 		}
 		produto.setDepartamentoId(departamento.getId());
+		produto.setTotalAcessos(0);
 		produto.setId(repository.saveAndFlush(new Produto(produto)).getId());
 		return produto;
 	}
@@ -63,6 +64,10 @@ public class ProdutoService implements IProdutoService {
 		return repository.findByNome(nome,idUsuario);
 	}
 
+	@Override
+	public List<ProdutoDTO> findFavoritosByUsuario(String idUsuario) {
+		return repository.findFavoritosByUsuario(idUsuario);
+	}
 
 
 }

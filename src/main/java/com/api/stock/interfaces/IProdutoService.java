@@ -17,6 +17,8 @@ public interface IProdutoService {
 
 	List<ProdutoDTO> buscarProdutosPorNome(String nome, String idUsuario);
 
+	List<ProdutoDTO> findFavoritosByUsuario(String idUsuario);
+
 	void deleteProduto(Integer id);
 	
 }

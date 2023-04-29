@@ -12,7 +12,10 @@ import javax.persistence.*;
 public class Avaliacao {
 
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
+	private Integer id;
+
 	@ManyToOne
 	@JoinColumn(name = "produto_id")
 	@JsonIgnore

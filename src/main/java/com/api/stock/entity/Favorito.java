@@ -1,6 +1,7 @@
 package com.api.stock.entity;
 
 import com.api.stock.model.FavoritoDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,14 +22,15 @@ public class Favorito {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
+    @JsonIgnore
     private Usuario idUsuario;
 
     @ManyToOne
     @JoinColumn(name = "produto_id")
+    @JsonIgnore
     private Produto idProduto;
 
     public Favorito(FavoritoDTO favorito){
-            this.id = favorito.getId();
             Usuario usu = new Usuario();
             usu.setId(favorito.getIdUsuario());
             this.idUsuario = usu;
